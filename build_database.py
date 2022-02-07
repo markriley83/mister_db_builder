@@ -107,6 +107,6 @@ if __name__ == '__main__':
         db_id='psx_mcd_db',
         base_files_url='https://github.com/Pezz82/MemCard-Pro-Packs/',
         base_files_url_extra='main/Individual Games/',
-        mister_files_base='/media/fat/games/PSX/mcd/',
+        mister_files_base='games/PSX/mcd/',
     )
     database_builder.run()
