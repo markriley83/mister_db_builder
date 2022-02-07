@@ -45,15 +45,15 @@ class DatabaseBuilder():
             for root, dirs, files in os.walk(tmp_dir):
                 for name in files:
                     filename = os.path.join(root, name)
-                    formatted_filename = os.path.join(root, name).replace(tmp_dir + os.sep, "").replace(self.source_bundle_cruft + os.sep, "")
+                    formatted_filename = os.path.join(root, name).replace(tmp_dir + os.sep, '').replace(self.source_bundle_cruft + os.sep, '')
                     self.files.update({
                         formatted_filename: {
-                            "hash": DatabaseBuilder.get_md5sum(filename),
-                            "size": os.path.getsize(filename),
-                            "url": self.base_files_url + urllib.parse.quote(self.base_files_url_extra + formatted_filename),
-                            "tags": [],
-                            "overwrite": False,
-                            "reboot": False,
+                            'hash': DatabaseBuilder.get_md5sum(filename),
+                            'size': os.path.getsize(filename),
+                            'url': self.base_files_url.replace('https://github.com/', 'https://raw.githubusercontent.com/') + urllib.parse.quote(self.base_files_url_extra + formatted_filename),
+                            'tags': [],
+                            'overwrite': False,
+                            'reboot': False,
                         }
                     })
 
