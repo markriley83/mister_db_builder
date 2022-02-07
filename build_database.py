@@ -4,6 +4,7 @@ import json
 import os
 import py7zr
 import time
+import urllib
 from dataclasses import dataclass
 from tempfile import TemporaryDirectory
 
@@ -49,7 +50,7 @@ class DatabaseBuilder():
                         formatted_filename: {
                             "hash": DatabaseBuilder.get_md5sum(filename),
                             "size": os.path.getsize(filename),
-                            "url": self.base_files_url + self.base_files_url_extra + formatted_filename,
+                            "url": self.base_files_url + urllib.parse.quote(self.base_files_url_extra + formatted_filename),
                             "tags": [],
                             "overwrite": False,
                             "reboot": False,
