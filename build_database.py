@@ -58,9 +58,22 @@ class DatabaseBuilder():
                         }
                     })
 
-
     def build_folders(self):
-        pass
+        self.folders = {
+            'games': {},
+            'games/PSX': {},
+            'games/PSX/mcd': {},
+        }
+        with TemporaryDirectory() as tmp_dir:
+            f7z = py7zr.SevenZipFile(io.BytesIO(self.source_bundle_response.content))
+            f7z.extractall(path=tmp_dir)
+            f7z.close()
+            for root, dirs, files in os.walk(tmp_dir):
+                for name in dirs:
+                    if name == self.source_bundle_cruft:
+                        continue
+                    folder_name = os.path.join(root, name).replace(tmp_dir + os.sep, '').replace(self.source_bundle_cruft + os.sep, '')
+                    self.folders.update({os.path.join('games/PSX/mcd', folder_name): {}})
 
     def build_tag_dictionary(self):
         pass
@@ -88,6 +101,7 @@ class DatabaseBuilder():
         database = self.metadata
         database.update({
             'files': self.files,
+            'folders': self.folders,
         })
         return database
 
