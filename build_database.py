@@ -105,6 +105,6 @@ if __name__ == '__main__':
         source_bundle_cruft='0.Memory Cards',
         db_id='psx_mcd_db',
         base_files_url='https://github.com/Pezz82/MemCard-Pro-Packs/',
-        base_files_url_extra='tree/main/Individual Games/'
+        base_files_url_extra='main/Individual Games/'
     )
     database_builder.run()
