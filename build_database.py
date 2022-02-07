@@ -17,6 +17,7 @@ class DatabaseBuilder():
     db_id: str
     base_files_url: str
     base_files_url_extra: str
+    mister_files_base:str
 
     def get_source_bundle(self):
         self.source_bundle_response = requests.get(self.source_bundle_url)
@@ -47,7 +48,7 @@ class DatabaseBuilder():
                     filename = os.path.join(root, name)
                     formatted_filename = os.path.join(root, name).replace(tmp_dir + os.sep, '').replace(self.source_bundle_cruft + os.sep, '')
                     self.files.update({
-                        formatted_filename: {
+                        os.path.join(self.mister_files_base, formatted_filename): {
                             'hash': DatabaseBuilder.get_md5sum(filename),
                             'size': os.path.getsize(filename),
                             'url': self.base_files_url.replace('https://github.com/', 'https://raw.githubusercontent.com/') + urllib.parse.quote(self.base_files_url_extra + formatted_filename),
@@ -105,6 +106,7 @@ if __name__ == '__main__':
         source_bundle_cruft='0.Memory Cards',
         db_id='psx_mcd_db',
         base_files_url='https://github.com/Pezz82/MemCard-Pro-Packs/',
-        base_files_url_extra='main/Individual Games/'
+        base_files_url_extra='main/Individual Games/',
+        mister_files_base='/media/fat/games/PSX/mcd/',
     )
     database_builder.run()
