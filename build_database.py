@@ -60,9 +60,8 @@ class DatabaseBuilder():
 
     def build_folders(self):
         self.folders = {
-            'games': {},
-            'games/PSX': {},
-            'games/PSX/mcd': {},
+            'saves': {},
+            'saves/PSX': {},
         }
         with TemporaryDirectory() as tmp_dir:
             f7z = py7zr.SevenZipFile(io.BytesIO(self.source_bundle_response.content))
@@ -121,6 +120,6 @@ if __name__ == '__main__':
         db_id='psx_mcd_db',
         base_files_url='https://github.com/Pezz82/MemCard-Pro-Packs/',
         base_files_url_extra='main/Individual Games/',
-        mister_files_base='games/PSX/mcd/',
+        mister_files_base='saves/PSX/mcd/',
     )
     database_builder.run()
